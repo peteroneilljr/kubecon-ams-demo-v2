@@ -1,0 +1,22 @@
+# Node modules
+node_modules/
+npm-debug.log
+package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+.env
+
+# Temporary files
+*.tmp
+/tmp/
+*.log
