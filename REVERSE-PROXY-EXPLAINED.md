@@ -136,32 +136,32 @@ Envoy is a modern, high-performance reverse proxy designed for cloud-native appl
 │                    Envoy Proxy                      │
 │                  (Port 8080)                        │
 │                                                     │
-│  ┌──────────────────────────────────────────────┐  │
-│  │  Listener (0.0.0.0:8080)                     │  │
-│  │  - Accepts all incoming connections          │  │
-│  └──────────────────┬───────────────────────────┘  │
+│  ┌──────────────────────────────────────────────┐   │
+│  │  Listener (0.0.0.0:8080)                     │   │
+│  │  - Accepts all incoming connections          │   │
+│  └──────────────────┬───────────────────────────┘   │
 │                     │                               │
 │                     ▼                               │
-│  ┌──────────────────────────────────────────────┐  │
-│  │  HTTP Connection Manager                     │  │
-│  │  - Manages HTTP/1.1, HTTP/2 connections     │  │
-│  └──────────────────┬───────────────────────────┘  │
+│  ┌──────────────────────────────────────────────┐   │
+│  │  HTTP Connection Manager                     │   │
+│  │  - Manages HTTP/1.1, HTTP/2 connections      │   │
+│  └──────────────────┬───────────────────────────┘   │
 │                     │                               │
 │                     ▼                               │
-│  ┌──────────────────────────────────────────────┐  │
-│  │  Filter Chain                                │  │
-│  │  1. JWT Authentication Filter                │  │
-│  │  2. RBAC Authorization Filter                │  │
-│  │  3. Router Filter                            │  │
-│  └──────────────────┬───────────────────────────┘  │
+│  ┌──────────────────────────────────────────────┐   │
+│  │  Filter Chain                                │   │
+│  │  1. JWT Authentication Filter                │   │
+│  │  2. RBAC Authorization Filter                │   │
+│  │  3. Router Filter                            │   │
+│  └──────────────────┬───────────────────────────┘   │
 │                     │                               │
 │                     ▼                               │
-│  ┌──────────────────────────────────────────────┐  │
-│  │  Clusters (Backend Services)                 │  │
-│  │  - public-app (port 3000)                    │  │
-│  │  - alice-app (port 3002)                     │  │
-│  │  - bob-app (port 3001)                       │  │
-│  └──────────────────────────────────────────────┘  │
+│  ┌──────────────────────────────────────────────┐   │
+│  │  Clusters (Backend Services)                 │   │
+│  │  - public-app (port 3000)                    │   │
+│  │  - alice-app (port 3002)                     │   │
+│  │  - bob-app (port 3001)                       │   │
+│  └──────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -423,17 +423,17 @@ All traffic flows through proxy:
 │                                              │
 │  User connects to VPN                        │
 │  ↓                                           │
-│  ┌────────────────────────────────────────┐ │
-│  │  User has network-level access to:     │ │
-│  │  - All backend services                │ │
-│  │  - All databases                       │ │
-│  │  - All internal systems                │ │
-│  └────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────┐  │
+│  │  User has network-level access to:     │  │
+│  │  - All backend services                │  │
+│  │  - All databases                       │  │
+│  │  - All internal systems                │  │
+│  └────────────────────────────────────────┘  │
 │                                              │
 │  Security Model:                             │
-│  - Trust based on network access            │
-│  - Coarse-grained (all or nothing)          │
-│  - No per-request validation                │
+│  - Trust based on network access             │
+│  - Coarse-grained (all or nothing)           │
+│  - No per-request validation                 │
 └──────────────────────────────────────────────┘
 ```
 
@@ -452,18 +452,18 @@ All traffic flows through proxy:
 │                                              │
 │  Every request validated                     │
 │  ↓                                           │
-│  ┌────────────────────────────────────────┐ │
-│  │  User identity checked per-request:    │ │
-│  │  - Alice → /alice only                 │ │
-│  │  - Bob → /bob only                     │ │
-│  │  - Both → /public                      │ │
-│  └────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────┐  │
+│  │  User identity checked per-request:    │  │
+│  │  - Alice → /alice only                 │  │
+│  │  - Bob → /bob only                     │  │
+│  │  - Both → /public                      │  │
+│  └────────────────────────────────────────┘  │
 │                                              │
 │  Security Model:                             │
-│  - Never trust, always verify               │
-│  - Fine-grained (per-resource)              │
-│  - Every request validated                  │
-│  - Complete identity context                │
+│  - Never trust, always verify                │
+│  - Fine-grained (per-resource)               │
+│  - Every request validated                   │
+│  - Complete identity context                 │
 └──────────────────────────────────────────────┘
 ```
 
@@ -530,32 +530,32 @@ Solution: Least-privilege access, per-resource control
 ### Network Topology
 
 ```
-┌────────────────────────────────────────────────┐
-│         Docker Network (demo-network)          │
-│                                                │
+┌───────────────────────────────────────────────┐
+│         Docker Network (demo-network)         │
+│                                               │
 │  ┌──────────────────────────────────────────┐ │
 │  │  Keycloak (keycloak:8180)                │ │
 │  │  - Issues JWT tokens                     │ │
 │  │  - Provides JWKS for validation          │ │
 │  └────────────┬─────────────────────────────┘ │
-│               │                                │
-│               │ JWKS                           │
-│               ▼                                │
+│               │                               │
+│               │ JWKS                          │
+│               ▼                               │
 │  ┌──────────────────────────────────────────┐ │
 │  │  Envoy Proxy (envoy:8080)                │ │
 │  │  - Validates JWTs                        │ │
 │  │  - Enforces RBAC                         │ │
 │  │  - Routes requests                       │ │
-│  └────┬────────┬────────┬──────────────────┘ │
-│       │        │        │                      │
-│       ▼        ▼        ▼                      │
-│  ┌────────┐ ┌────────┐ ┌────────┐           │
-│  │public  │ │ alice  │ │  bob   │           │
-│  │  app   │ │  app   │ │  app   │           │
-│  │ :3000  │ │ :3002  │ │ :3001  │           │
-│  └────────┘ └────────┘ └────────┘           │
-│                                                │
-└────────────────────────────────────────────────┘
+│  └────┬────────┬────────┬───────────────────┘ │
+│       │        │        │                     │
+│       ▼        ▼        ▼                     │
+│  ┌────────┐ ┌────────┐ ┌────────┐             │
+│  │public  │ │ alice  │ │  bob   │             │
+│  │  app   │ │  app   │ │  app   │             │
+│  │ :3000  │ │ :3002  │ │ :3001  │             │
+│  └────────┘ └────────┘ └────────┘             │
+│                                               │
+└───────────────────────────────────────────────┘
         ↑
         │ Port 8080 exposed
         │
