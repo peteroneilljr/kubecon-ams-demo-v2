@@ -454,6 +454,13 @@ docker-compose down -v     # Stop and remove volumes (reset Keycloak)
 
 ## Further Reading
 
+### In-Depth Explanations
+- [Reverse Proxy Architecture](docs/REVERSE-PROXY-EXPLAINED.md) - How reverse proxies provide security
+- [OAuth2 and OIDC](docs/OAUTH-OIDC-EXPLAINED.md) - Authentication protocols explained
+- [JWT Tokens](docs/JWT-EXPLAINED.md) - Token structure and security properties
+- [Access Logging](docs/ACCESS-LOGGING-EXPLAINED.md) - Identity-aware audit trails
+
+### External Resources
 - [Envoy JWT Authentication](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/jwt_authn_filter)
 - [Envoy RBAC](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/rbac_filter)
 - [NIST Zero Trust Architecture](https://www.nist.gov/publications/zero-trust-architecture)
