@@ -16,9 +16,9 @@ This repository demonstrates **per-user identity-based access control** using a 
 └──────┬───────────┘
        │ JWT Token (signed, contains username + roles)
        ▼
-┌───────────────────────────────────────────┐
-│            Envoy Proxy                    │
-│            Port: 8080                     │
+┌──────────────────────────────────────────┐
+│            Envoy Proxy                   │
+│            Port: 8080                    │
 │  ┌─────────────────────────────────────┐ │
 │  │ 1. JWT Authentication Filter        │ │ ← Validates token signature
 │  │    - Verifies JWT signature (JWKS)  │ │ ← Extracts claims (username, roles)
@@ -286,7 +286,7 @@ Envoy Access Logger:
 
 #### 4. Credential Theft (Mitigated ⚠️)
 - **Threat**: Stolen JWT used by attacker
-- **Protection**: Short token expiration (5 minutes), audience claims
+- **Protection**: Short token expiration (5 minutes)
 - **Limitation**: Valid tokens still work until expiration
 - **Mitigation**: Use short-lived tokens + refresh tokens
 
@@ -394,7 +394,7 @@ curl -H "Authorization: Bearer $TOKEN_BOB" http://localhost:8080/bob       # 200
 └─────────────┴──────────┴────────────┴──────────┘
 ```
 
-## Key Demo Points for Your Talk
+## Key Demo Points
 
 ### VPN Problems
 - **Network-level access**: Once inside, you can reach everything
@@ -411,7 +411,7 @@ curl -H "Authorization: Bearer $TOKEN_BOB" http://localhost:8080/bob       # 200
 5. **Complete Audit**: Full trail of who accessed what
 
 ### The "Aha" Moment
-When Bob (admin) tries to access Alice's app and gets **403 Forbidden**, the audience sees:
+When Bob (admin) tries to access Alice's app and gets **403 Forbidden**:
 - Authentication ≠ Authorization
 - Roles don't override per-user policies
 - True zero trust in action
@@ -454,12 +454,7 @@ docker-compose down -v     # Stop and remove volumes (reset Keycloak)
 
 ## Further Reading
 
-- [NEW-ARCHITECTURE.md](./NEW-ARCHITECTURE.md) - Detailed architecture explanation
 - [Envoy JWT Authentication](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/jwt_authn_filter)
 - [Envoy RBAC](https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/rbac_filter)
 - [NIST Zero Trust Architecture](https://www.nist.gov/publications/zero-trust-architecture)
 - [OAuth2 Password Grant](https://oauth.net/2/grant-types/password/) (not for production!)
-
-## License
-
-MIT

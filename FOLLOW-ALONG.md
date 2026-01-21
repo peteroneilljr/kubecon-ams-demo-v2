@@ -473,7 +473,7 @@ TOKEN_ALICE=$(curl -s -X POST "http://localhost:8180/realms/demo/protocol/openid
 
 ### Problem: 403 Forbidden when you expect 200
 
-This is expected behavior! Check:
+Check:
 - Alice cannot access `/bob` → 403 is correct
 - Bob cannot access `/alice` → 403 is correct
 - Only deny `/public` access would be unexpected (should be 200 for both)
@@ -491,15 +491,6 @@ sudo apt-get install jq
 # Or view raw JSON without jq
 curl -H "Authorization: Bearer $TOKEN_ALICE" http://localhost:8080/public
 ```
-
----
-
-## Next Steps
-
-1. Read [README.md](./README.md) for detailed architecture explanation
-2. Review [NEW-ARCHITECTURE.md](./NEW-ARCHITECTURE.md) for design decisions
-3. Examine [envoy/envoy.yaml](./envoy/envoy.yaml) to see RBAC policies
-4. Check [keycloak/realm-export.json](./keycloak/realm-export.json) for user setup
 
 ---
 
