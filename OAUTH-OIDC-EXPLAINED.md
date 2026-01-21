@@ -666,23 +666,23 @@ http://localhost:8180/realms/demo/protocol/openid-connect/logout?
 
 ### OAuth2 Elements Used
 
-✅ **Authorization Server**: Keycloak issues tokens
-✅ **Resource Server**: Envoy + backend apps validate tokens
-✅ **Access Token**: JWT token grants access to resources
-✅ **Bearer Token**: Token sent in `Authorization: Bearer` header
-✅ **Grant Type**: Password grant (demo only, not for production)
-✅ **Token Endpoint**: `/realms/demo/protocol/openid-connect/token`
-✅ **Token Expiration**: 5-minute TTL (exp claim)
+- ✅ **Authorization Server**: Keycloak issues tokens
+- ✅ **Resource Server**: Envoy + backend apps validate tokens
+- ✅ **Access Token**: JWT token grants access to resources
+- ✅ **Bearer Token**: Token sent in `Authorization: Bearer` header
+- ✅ **Grant Type**: Password grant (demo only, not for production)
+- ✅ **Token Endpoint**: `/realms/demo/protocol/openid-connect/token`
+- ✅ **Token Expiration**: 5-minute TTL (exp claim)
 
 ### OIDC Elements Used
 
-✅ **Identity Provider**: Keycloak provides user identity
-✅ **ID Token**: JWT contains user claims (identity)
-✅ **UserInfo Endpoint**: Can fetch additional user details
-✅ **Standard Claims**: `sub`, `iss`, `aud`, `exp`, `preferred_username`, `email`
-✅ **Discovery**: `.well-known/openid-configuration` endpoint
-✅ **JWKS Endpoint**: Public keys for JWT verification
-✅ **Scopes**: `openid profile email` (implicit)
+- ✅ **Identity Provider**: Keycloak provides user identity
+- ✅ **ID Token**: JWT contains user claims (identity)
+- ✅ **UserInfo Endpoint**: Can fetch additional user details
+- ✅ **Standard Claims**: `sub`, `iss`, `aud`, `exp`, `preferred_username`, `email`
+- ✅ **Discovery**: `.well-known/openid-configuration` endpoint
+- ✅ **JWKS Endpoint**: Public keys for JWT verification
+- ✅ **Scopes**: `openid profile email` (implicit)
 
 ### The Magic
 
